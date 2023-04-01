@@ -1,0 +1,11 @@
+{
+  "domain": "em6",
+  "name": "em6 Energy Price",
+  "version": "1.0.0",
+  "documentation": "https://github.com/codyc1515/hacs_em6",
+  "issue_tracker": "https://github.com/codyc15/hacs_em6/issues",
+  "codeowners": ["@codyc1515"],
+  "requirements": [],
+  "iot_class": "cloud_polling",
+  "dependencies": []
+}
