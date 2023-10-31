@@ -11,12 +11,12 @@ sensor:
 ## Installation
 ### HACS (recommended)
 1. [Install HACS](https://hacs.xyz/docs/setup/download), if you did not already
-2. [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=codyc1515&repository=ha-orion&category=integration)
-3. Install the Orion Network Load Management integration
+2. [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=codyc1515&repository=ha-em6&category=integration)
+3. Install the em6 Energy Price integration
 4. Restart Home Assistant
 
 ### Manually
-Copy all files in the custom_components/orion folder to your Home Assistant folder *config/custom_components/orion*.
+Copy all files in the custom_components/em6 folder to your Home Assistant folder *config/custom_components/em6*.
 
 ## Known issues
 None known.
