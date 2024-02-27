@@ -7,6 +7,7 @@ sensor:
   - platform: em6
     location: Christchurch # Grid Zone Name
 ```
+The list of Grid Zone Names (Locations) is available at https://app.em6.co.nz/
 
 ## Installation
 ### HACS (recommended)
