@@ -57,7 +57,7 @@ class em6EnergyPriceSensor(SensorEntity):
         self._attr_name = name
         self._attr_icon = "mdi:chart-bar"
         self._attr_native_value = None
-        self._attr_state_attributes = {}
+        self._extra_attr = {}
         self._attr_device_class = None
         self._attr_state_class = SensorStateClass.MEASUREMENT
         self._attr_native_unit_of_measurement = 'NZD/kWh'
@@ -75,9 +75,9 @@ class em6EnergyPriceSensor(SensorEntity):
             # Avoid updating the price (state) if the price is still the same or we will get duplicate notifications
             if self._attr_native_value != response['price'] / 1000:
                 self._attr_native_value = response['price'] / 1000
-                self._attr_state_attributes['Trading Period'] = response['trading_period']
-                self._attr_state_attributes['Grid Zone'] = response['grid_zone_name']
-                self._attr_state_attributes['Last Updated'] = response['timestamp']
+                self._extra_attr['Trading Period'] = response['trading_period']
+                self._extra_attr['Grid Zone'] = response['grid_zone_name']
+                self._extra_attr['Last Updated'] = response['timestamp']
         else:
             self._attr_native_value = None
             _LOGGER.warning('Found no prices on refresh')
