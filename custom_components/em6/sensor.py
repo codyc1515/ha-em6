@@ -6,7 +6,6 @@ import voluptuous as vol
 
 import homeassistant.helpers.config_validation as cv
 from homeassistant.components.sensor import PLATFORM_SCHEMA
-from homeassistant.components.sensor import SensorDeviceClass
 from homeassistant.components.sensor import SensorEntity
 from homeassistant.components.sensor import SensorStateClass
 from homeassistant.const import CONF_LOCATION
@@ -59,7 +58,7 @@ class em6EnergyPriceSensor(SensorEntity):
         self._attr_icon = "mdi:chart-bar"
         self._attr_native_value = None
         self._attr_state_attributes = {}
-        self._attr_device_class = SensorDeviceClass.MONETARY
+        self._attr_device_class = None
         self._attr_state_class = SensorStateClass.MEASUREMENT
         self._attr_native_unit_of_measurement = 'NZD/kWh'
         self._attr_unique_id = DOMAIN
