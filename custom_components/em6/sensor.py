@@ -7,9 +7,9 @@ import voluptuous as vol
 import homeassistant.helpers.config_validation as cv
 from homeassistant.components.sensor import PLATFORM_SCHEMA
 from homeassistant.components.sensor import SensorDeviceClass
+from homeassistant.components.sensor import SensorEntity
 from homeassistant.components.sensor import SensorStateClass
 from homeassistant.const import CONF_LOCATION
-from homeassistant.helpers.entity import Entity
 
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
@@ -53,7 +53,7 @@ async def async_setup_platform(hass, config, async_add_entities,
     sensors .append(em6EnergyPriceSensor(SENSOR_NAME, api))
     async_add_entities(sensors, True)
 
-class em6EnergyPriceSensor(Entity):
+class em6EnergyPriceSensor(SensorEntity):
     def __init__(self, name, api):
         self._attr_name = name
         self._attr_icon = "mdi:chart-bar"
