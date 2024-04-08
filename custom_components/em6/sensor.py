@@ -76,9 +76,9 @@ class em6EnergyPriceSensor(Entity):
             # Avoid updating the price (state) if the price is still the same or we will get duplicate notifications
             if self._attr_native_value != response['price'] / 1000:
                 self._attr_native_value = response['price'] / 1000
-                self._state_attributes['Trading Period'] = response['trading_period']
-                self._state_attributes['Grid Zone'] = response['grid_zone_name']
-                self._state_attributes['Last Updated'] = response['timestamp']
+                self._attr_state_attributes['Trading Period'] = response['trading_period']
+                self._attr_state_attributes['Grid Zone'] = response['grid_zone_name']
+                self._attr_state_attributes['Last Updated'] = response['timestamp']
         else:
             self._attr_native_value = None
             _LOGGER.warning('Found no prices on refresh')
