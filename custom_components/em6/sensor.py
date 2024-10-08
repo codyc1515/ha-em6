@@ -6,8 +6,9 @@ import voluptuous as vol
 
 import homeassistant.helpers.config_validation as cv
 from homeassistant.components.sensor import PLATFORM_SCHEMA
+from homeassistant.components.sensor import SensorEntity
+from homeassistant.components.sensor import SensorStateClass
 from homeassistant.const import CONF_LOCATION
-from homeassistant.helpers.entity import Entity
 
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
@@ -51,51 +52,17 @@ async def async_setup_platform(hass, config, async_add_entities,
     sensors .append(em6EnergyPriceSensor(SENSOR_NAME, api))
     async_add_entities(sensors, True)
 
-class em6EnergyPriceSensor(Entity):
+class em6EnergyPriceSensor(SensorEntity):
     def __init__(self, name, api):
-        self._name = name
-        self._icon = "mdi:chart-bar"
-        self._state = None
-        self._state_attributes = {}
-        self._state_class = "measurement"
-        self._unit_of_measurement = '$'
-        self._unique_id = DOMAIN
+        self._attr_name = name
+        self._attr_icon = "mdi:chart-bar"
+        self._attr_native_value = None
+        self._extra_attr = {}
+        self._attr_device_class = None
+        self._attr_state_class = SensorStateClass.MEASUREMENT
+        self._attr_native_unit_of_measurement = 'NZD/kWh'
+        self._attr_unique_id = DOMAIN
         self._api = api
-
-    @property
-    def name(self):
-        """Return the name of the sensor."""
-        return self._name
-
-    @property
-    def icon(self):
-        """Icon to use in the frontend, if any."""
-        return self._icon
-
-    @property
-    def state(self):
-        """Return the state of the device."""
-        return self._state
-
-    @property
-    def state_class(self):
-        """Return the state class of the device."""
-        return self._state_class
-
-    @property
-    def extra_state_attributes(self):
-        """Return the state attributes of the sensor."""
-        return self._state_attributes
-
-    @property
-    def unit_of_measurement(self):
-        """Return the unit of measurement."""
-        return self._unit_of_measurement
-
-    @property
-    def unique_id(self):
-        """Return the unique id."""
-        return self._unique_id
 
     def update(self):
         _LOGGER.debug('Fetching prices')
@@ -106,11 +73,11 @@ class em6EnergyPriceSensor(Entity):
             _LOGGER.debug(response)
             
             # Avoid updating the price (state) if the price is still the same or we will get duplicate notifications
-            if self._state != response['price'] / 1000:
-                self._state = response['price'] / 1000
-                self._state_attributes['Trading Period'] = response['trading_period']
-                self._state_attributes['Grid Zone'] = response['grid_zone_name']
-                self._state_attributes['Last Updated'] = response['timestamp']
+            if self._attr_native_value != response['price'] / 1000:
+                self._attr_native_value = response['price'] / 1000
+                self._extra_attr['Trading Period'] = response['trading_period']
+                self._extra_attr['Grid Zone'] = response['grid_zone_name']
+                self._extra_attr['Last Updated'] = response['timestamp']
         else:
-            self._state = None
+            self._attr_native_value = None
             _LOGGER.warning('Found no prices on refresh')
