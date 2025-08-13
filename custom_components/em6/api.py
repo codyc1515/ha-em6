@@ -1,8 +1,6 @@
 """em6 API"""
 import logging
-from datetime import datetime, timedelta
 import requests
-import json
 
 _LOGGER = logging.getLogger(__name__)
 
